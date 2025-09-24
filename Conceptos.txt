@@ -1,0 +1,104 @@
+Metodo constructor:
+MedicamentoInyectado:
+En la clase MedicamentoInyectado, el constructor está ubicado en la línea 12. Aquí se utiliza el constructor de la clase
+ base Medicamento mediante la palabra clave super para inicializar los atributos heredados, y luego se inicializan los atributos propios como tipoAplicacion y tipoJeringa.
+
+ MedicamentoOral:
+El constructor de MedicamentoOral está definido en la línea 12. Similar a la clase inyectada, usa super para llamar al constructor de la clase padre y luego asigna valores
+ a sus propios atributos adicionales, como esRequeridaAgua y empaqueMedicamento.
+
+ Proveedor:
+En la clase Proveedor, el constructor con parámetros está en la línea 12. Este método inicializa la información del proveedor, como origen, producto, destino, 
+identificación y el país asociado. También existe un constructor vacío en la línea 9.
+
+Pais:
+La clase Pais tiene su constructor con parámetros en la línea 13, que inicializa el identificador del país y su nombre. Además, un constructor 
+vacío se encuentra en la línea 10, que permite crear objetos sin inicialización inmediata.
+
+Categoria:
+En la clase Categoria, el constructor con parámetros se encuentra en la línea 14. Este constructor permite definir restricciones relacionadas con la 
+enfermedad, edad y embarazo para la categoría del medicamento. Un constructor vacío está en la línea 7.
+
+Presentacion:
+El constructor con parámetros de la clase Presentacion está en la línea 12. Aquí se establecen atributos como serial, material, diseño, vencimiento, 
+y otros detalles importantes de la presentación del medicamento. El constructor vacío está definido en la línea 10.
+
+Formula:
+En la clase Formula, el constructor con parámetros se ubica en la línea 11. Este constructor inicializa propiedades como dosis, peso, registro, cantidad, nombre, ID, for
+ma de aplicación y un arreglo de medicamentos asociados. También cuenta con un constructor vacío en la línea 9.
+
+Medicamento:
+En la clase Medicamento, el método constructor principal se encuentra en la línea 29. Este constructor con parámetros inicializa todos los atributos del objeto, como peso, proveedor, aplicación y otros detalles importantes. También existe
+ un constructor vacío en la línea 27, que permite crear un objeto sin inicializar sus atributos de inmediato.
+
+ METODOS DE ACCESO:
+ Medicamento:
+ En la clase Medicamento, los métodos de acceso comienzan a partir de la línea 74. Se incluyen get y set para casi todos los atributos: peso, proveedor, aplicacion, esVencido, tamano, medida, estado, formula, etiqueta, dosis, cliente, pais, categoria, presentacion, y anioCreacion. El atributo serial solo tiene un getter
+  (getSerial) porque fue declarado como final, por lo tanto no se puede modificar después de su inicialización.
+
+  MedicamentoInyectado
+En la clase MedicamentoInyectado, los métodos de acceso están ubicados a partir de la línea 28. Hay getTipoAplicacion y setTipoAplicacion, así como getTipoJeringa y 
+setTipoJeringa. Estos permiten acceder y modificar los atributos adicionales de esta subclase especializada.
+
+MedicamentoOral
+En MedicamentoOral, los métodos de acceso aparecen desde la línea 26. Incluyen isEsRequeridaAgua y setEsRequeridaAgua, 
+además de getEmpaqueMedicamento y setEmpaqueMedicamento. Estos controlan el acceso a los atributos únicos de los medicamentos orales.
+
+Proveedor
+En la clase Proveedor, los métodos de acceso se encuentran desde la línea 13. 
+Se proporcionan get y set para origen, producto, destino, idProveedor, y pais. Esto permite encapsular adecuadamente los datos del proveedor.
+
+Pais
+Los métodos de acceso en Pais comienzan en la línea 16. Incluyen getIdPais, setIdPais, getNombre, y setNombre. Con ellos se gestiona la información del país.
+
+Categoria
+En la clase Categoria, los métodos de acceso están desde la línea 21. Se utilizan get y set para idEnfermedad, 
+restriccionEdad y restriccionEnfermedad. Así se puede acceder y modificar los valores de cada restricción asociada.
+
+Presentacion
+Los métodos de acceso en Presentacion inician en la línea 22. Incluyen get y set para todos sus atributos: serial, material, diseno, vencimiento, nombre, contenido, fabricante y restricciones.
+ Estos métodos permiten mantener la encapsulación de los datos de presentación del medicamento.
+
+ Formula
+En la clase Formula, los métodos de acceso están desde la línea 27. Se encuentran get y set para dosis, peso, registro, cantidad, nombre, id, formaAplicacion, y el arreglo de medicamentos (medicamento).
+ Estos permiten trabajar con cada propiedad de la fórmula médica de forma segura y controlada.
+
+ Medicamento
+ línea 38
+La clase Medicamento sobrescribe el método toString() para mostrar todos los atributos del medicamento, incluyendo objetos anidados como proveedor, formula, pais, categoria, y el arreglo de presentacion. Esto permite imprimir una
+ descripción detallada del medicamento cuando se utiliza System.out.println(medicamento).
+
+MedicamentoInyectado
+línea 36
+En esta clase se sobrescribe el método toString() y se llama al super.toString() para heredar la información base del medicamento. Luego, 
+se agregan los atributos tipoAplicacion y tipoJeringa, propios de los medicamentos inyectables, para mostrar una vista completa del objeto.
+
+MedicamentoOral
+ No implementa toString()
+Esta clase no tiene su propio método toString(), 
+por lo tanto hereda el método de la clase Medicamento. Si se imprimen objetos de esta clase, se mostrará el formato definido en la clase base.
+
+Proveedor
+no tiene toString()
+Esta clase no define el método toString(). Si se desea visualizar información detallada del proveedor, sería recomendable implementar este método en futuras mejoras.
+
+Pais
+línea 6
+En esta clase se sobrescribe toString() para mostrar los atributos idPais y nombre. Esto facilita la lectura del país cuando se imprime como parte de otros objetos, como Medicamento.
+
+Categoria
+línea 7
+La clase implementa el método toString() para mostrar idEnfermedad, restriccionEdad y restriccionEnfermedad.
+ Esto es útil cuando se imprimen objetos de tipo Categoria directamente o como parte de otros objetos.
+
+ Presentacion
+línea 42
+Se sobrescribe el método toString() para mostrar todos los atributos como serial, material, contenido,
+ fabricante, entre otros. Es especialmente útil cuando se imprimen arreglos de Presentacion desde Medicamento.
+
+ Formula
+ línea 19
+La clase Formula sobrescribe toString() para mostrar todos sus atributos, incluido el arreglo de medicamentos 
+(medicamento[]), mediante Arrays.toString(). Así se obtiene una visión clara de los contenidos de una fórmula médica.
+
+https://github.com/galindofabianeslavigol-collab/Proyecto_clase
