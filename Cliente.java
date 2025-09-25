@@ -1,11 +1,21 @@
 package co.edu.poli.actividad3.vista;
 
 import co.edu.poli.actividad3.model.*;
+import co.edu.poli.seriviosa.servicios.ImplemtecacionOpCrud;
 
+/**
+ * Clase principal Cliente para probar la creación y manejo de medicamentos.
+ * Realiza operaciones CRUD y muestra uso de polimorfismo.
+ * 
+ * @author Fabian Galindo Rojas
+ */
 public class Cliente {
 
-
-
+    /**
+     * Método principal para ejecución de pruebas con medicamentos.
+     * 
+     * @param args Argumentos de línea de comando (no utilizados)
+     */
     public static void main(String[] args) {
         Pais pais = new Pais("CO", "Colombia");
         Categoria categoria = new Categoria("ENF001", "18+", "No embarazadas");
@@ -13,10 +23,11 @@ public class Cliente {
                                              "250ml", "LabXYZ", "Mantener en frío");
         Proveedor proveedor = new Proveedor("Bogotá", "MedicamentoX", "Medellín", "P123", pais);
 
-        Medicamento medicamento = new Medicamento(0.5, proveedor, "Oral", false, "M001", "Pequeño",
-                                                  10.5, "Activo", null, "Etiqueta1", 2,
-                                                  "ClienteX", pais, categoria,
-                                                  new Presentacion[]{pres}, 2022);
+        Medicamento medicamento = new MedicamentoOral(0.5, proveedor, "Oral", false, "M001", "Pequeño",
+                                              10.5, "Activo", null, "Etiqueta1", 2,
+                                              "ClienteX", pais, categoria,
+                                              new Presentacion[]{pres}, 2022,
+                                              false, "Blíster");
 
         MedicamentoInyectado medicamentoInyectado = new MedicamentoInyectado(0.7, proveedor, "Inyectado", false, "M003", "Grande",
                                                                              15.0, "Refrigerado", null, "EtiquetaInyectado", 3,
@@ -32,14 +43,17 @@ public class Cliente {
 
         System.out.println(medicamento);
         System.out.println("Edad del medicamento: " + medicamento.getEdadActual() + " años");
+
         System.out.println("\nMEDICAMENTO ESCRITURA");
         System.out.println("Descripción de aplicación (Medicamento): " + medicamento.descripcionAplicacion());
 
         System.out.println("\nMEDICAMENTO INYECTADO");
         System.out.println(medicamentoInyectado);
         System.out.println("Edad del medicamento inyectado: " + medicamentoInyectado.getEdadActual() + " años");
+
         System.out.println("\nESCRITURA");
         System.out.println("Descripción de aplicación (Medicamento): " + medicamento.descripcionAplicacion());
+
         System.out.println("\nSOBRECARGA");
         System.out.println("Descripción de aplicación con detalle (Medicamento): " + medicamento.descripcionAplicacion("Uso Pediatrico"));
 
@@ -69,16 +83,12 @@ public class Cliente {
             }
         }
 
-
         System.out.println("\nInvocación metodos de Poliformismo");
-
-       
         System.out.println("Medicamento descripcionAplicacion con parámetro:");
         System.out.println(medicamento.descripcionAplicacion("Uso General"));
         System.out.println(medicamentoInyectado.descripcionAplicacion("Uso Intramuscular"));
         System.out.println(medicamentoOral.descripcionAplicacion("Uso Pediátrico"));
 
- 
         System.out.println("\nObteniendo el país de origen de los medicamentos:");
         Pais paisMedicamento = medicamento.getPais();
         Pais paisMedicamentoInyectado = medicamentoInyectado.getPais();
@@ -88,8 +98,35 @@ public class Cliente {
         System.out.println("Medicamento Inyectado Pais: " + paisMedicamentoInyectado.getNombre());
         System.out.println("Medicamento Oral Pais: " + paisMedicamentoOral.getNombre());
 
-         }
-      }
+        // ----------- PARTE CRUD AÑADIDA AQUÍ ----------------
+        System.out.println("\n--- Operaciones CRUD ---");
 
+        ImplemtecacionOpCrud crud = new ImplemtecacionOpCrud();
 
+        crud.crear(medicamento);
+        crud.crear(medicamentoInyectado);
+        crud.crear(medicamentoOral);
 
+        System.out.println("\nLista de medicamentos registrados:");
+        for (Medicamento med : crud.listar()) {
+            System.out.println("- " + med.getSerial() + ": " + med.getEtiqueta());
+        }
+
+        System.out.println("\nBuscando medicamento con serial 'M004':");
+        Medicamento buscado = crud.buscar("M004");
+        if (buscado != null) {
+            System.out.println("Encontrado: " + buscado.getEtiqueta());
+        } else {
+            System.out.println("No encontrado");
+        }
+
+        System.out.println("\nEliminando medicamento con serial 'M003':");
+        boolean eliminado = crud.eliminar("M003");
+        System.out.println("¿Eliminado?: " + eliminado);
+
+        System.out.println("\nLista después de eliminar:");
+        for (Medicamento med : crud.listar()) {
+            System.out.println("- " + med.getSerial() + ": " + med.getEtiqueta());
+        }
+    }
+}
